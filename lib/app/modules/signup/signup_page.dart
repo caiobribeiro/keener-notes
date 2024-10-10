@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:keener_notes/app/modules/signup/repository/signup_repository.dart';
+import 'package:keener_notes/app/modules/signup/signup_store.dart';
+import 'package:keener_notes/app/shared/widgets/custom_button_widget.dart';
+import 'package:keener_notes/app/shared/widgets/custom_passworf_field_widget.dart';
+import 'package:keener_notes/app/shared/widgets/custom_tesxt_fild_widget.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({
@@ -12,25 +16,106 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  final SignupRepository service = Modular.get<SignupRepository>();
+  final SignupStore store = Modular.get<SignupStore>();
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordConfirmationController =
+      TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _passwordConfirmationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Keener notes'),
       ),
-      body: Center(
-          child: Column(
-        children: [
-          const Text('signup'),
-          ElevatedButton(
-              onPressed: () {
-                service.signup(
-                    email: 'caio@gmail.com', password: 'asidfjugbasidjf');
-              },
-              child: const Text('criar conta'))
-        ],
-      )),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        child: Column(
+          children: [
+            const Center(
+              child: Text(
+                'Register Account',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 32,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 80,
+            ),
+            SizedBox(
+              width: 400,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _titleText(context, 'Email Address'),
+                  CustomTesxtFildWidget(
+                    controller: _emailController,
+                    hintText: 'Email',
+                    onChange: (value) {
+                      store.emailControllerText = value;
+                    },
+                  ),
+                  _titleText(context, 'Password'),
+                  CustomPassworfFieldWidget(
+                    controller: _passwordController,
+                    hintText: 'Password',
+                    onChange: (value) {
+                      store.passwordControllerText = value;
+                    },
+                  ),
+                  _titleText(context, 'Password confirmation'),
+                  CustomPassworfFieldWidget(
+                    controller: _passwordConfirmationController,
+                    hintText: 'Password',
+                    onChange: (value) {
+                      store.passwordConfirmationControllerText = value;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Center(
+                    child: Observer(builder: (_) {
+                      return Column(
+                        children: [
+                          CustomButtonWidget(
+                            isValid: store.isFormCorrect,
+                            text: 'Register account',
+                            onPressed: () {},
+                          ),
+                        ],
+                      );
+                    }),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _titleText(BuildContext context, String text) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 5, top: 5),
+      child: Text(
+        text,
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+      ),
     );
   }
 }
