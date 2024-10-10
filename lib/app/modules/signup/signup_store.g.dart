@@ -103,12 +103,37 @@ mixin _$SignupStore on SignupStoreBase, Store {
     });
   }
 
+  late final _$responseWarningAtom =
+      Atom(name: 'SignupStoreBase.responseWarning', context: context);
+
+  @override
+  String get responseWarning {
+    _$responseWarningAtom.reportRead();
+    return super.responseWarning;
+  }
+
+  @override
+  set responseWarning(String value) {
+    _$responseWarningAtom.reportWrite(value, super.responseWarning, () {
+      super.responseWarning = value;
+    });
+  }
+
+  late final _$registerAccountAsyncAction =
+      AsyncAction('SignupStoreBase.registerAccount', context: context);
+
+  @override
+  Future<SignupResponse> registerAccount() {
+    return _$registerAccountAsyncAction.run(() => super.registerAccount());
+  }
+
   @override
   String toString() {
     return '''
 emailControllerText: ${emailControllerText},
 passwordControllerText: ${passwordControllerText},
 passwordConfirmationControllerText: ${passwordConfirmationControllerText},
+responseWarning: ${responseWarning},
 isEmailValid: ${isEmailValid},
 isPasswordSafe: ${isPasswordSafe},
 isPasswordEmpty: ${isPasswordEmpty},

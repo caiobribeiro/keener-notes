@@ -42,17 +42,17 @@ class _SignupPageState extends State<SignupPage> {
         child: Column(
           children: [
             const Center(
-              child: Text(
-                'Register Account',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 32,
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 70),
+                child: Text(
+                  'Register Account',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 32,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 80,
             ),
             SizedBox(
               width: 400,
@@ -91,10 +91,16 @@ class _SignupPageState extends State<SignupPage> {
                     child: Observer(builder: (_) {
                       return Column(
                         children: [
+                          if (store.responseWarning != '') ...[
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(store.responseWarning),
+                            )
+                          ],
                           CustomButtonWidget(
                             isValid: store.isFormCorrect,
                             text: 'Register account',
-                            onPressed: () {},
+                            onPressed: store.registerAccount,
                           ),
                         ],
                       );

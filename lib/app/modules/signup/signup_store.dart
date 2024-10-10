@@ -1,3 +1,6 @@
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:keener_notes/app/modules/signup/repository/signup_repository.dart';
+import 'package:keener_notes/app/modules/signup/response/signup_response.dart';
 import 'package:mobx/mobx.dart';
 
 part 'signup_store.g.dart';
@@ -5,6 +8,8 @@ part 'signup_store.g.dart';
 class SignupStore = SignupStoreBase with _$SignupStore;
 
 abstract class SignupStoreBase with Store {
+  final SignupRepository _signupRepository = Modular.get<SignupRepository>();
+
   @observable
   String emailControllerText = '';
 
@@ -13,6 +18,9 @@ abstract class SignupStoreBase with Store {
 
   @observable
   String passwordConfirmationControllerText = '';
+
+  @observable
+  String responseWarning = '';
 
   @computed
   bool get isEmailValid => RegExp(
@@ -39,4 +47,15 @@ abstract class SignupStoreBase with Store {
 
   @computed
   bool get isFormCorrect => isBothPasswordValid && isEmailValid;
+
+  @action
+  Future<SignupResponse> registerAccount() async {
+    final response = await _signupRepository.signup(
+        email: emailControllerText, password: passwordControllerText);
+    if (!response.success) {
+      responseWarning = response.firebaseAuthException ?? 'Unknown error';
+    }
+
+    return response;
+  }
 }
