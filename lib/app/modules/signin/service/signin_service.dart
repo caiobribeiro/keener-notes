@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:keener_notes/app/modules/signin/response/signin_response.dart';
 
 class SigninService {
-  Future<SigninResponse> signup({
+  Future<SigninResponse> signin({
     required String email,
     required String password,
   }) async {
