@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "719433497403",
+    "project_id": "keener-notes",
+    "storage_bucket": "keener-notes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:719433497403:android:1c89156279fc0267d6551e",
+        "android_client_info": {
+          "package_name": "com.example.keener_notes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZDk24Ds5Ur4jz81PWSK07a_uSAPITtMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
