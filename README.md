@@ -1,16 +1,54 @@
 # keener_notes
 
-A new Flutter project.
+Keener Notes is simple note taking app.
 
-## Getting Started
+## Tech
 
-This project is a starting point for a Flutter application.
+Developed in [Flutter].
 
-A few resources to get you started if this is your first Flutter project:
+⚠️ Important, read the [ARCHITECTURE](./ARCHITECTURE.md)  before starting development, your code MUST comply with the ARCHITECTURE rules.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Login Screen: Allow authentication with email and password using Firebase Auth;
+- Registration Screen: Allow new user registration;
+- Main Screen: Display the task list of the authenticated user;
+- Note Details Screen: Show details and allow editing of a selected task;
+- Note Creation Screen: Allow the creation of new tasks.
+
+
+
+
+
+
+
+
+## Installation and Running
+
+
+Install the dependencies and dev dependencies and run the project.
+
+```sh
+flutter pub get
+flutter run
+```
+
+
+
+
+## Building 
+
+For production release follow the official Google Guide: [Flutter Build]
+
+```sh
+flutter build web 
+```
+
+
+## License
+
+MIT
+
+[Flutter]: <https://flutter.dev/>
+[Flutter Build]: <https://docs.flutter.dev/deployment/android>
+
