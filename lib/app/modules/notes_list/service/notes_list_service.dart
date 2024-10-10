@@ -28,4 +28,12 @@ class NotesListService {
       return NotesListResponse(error: e.toString());
     }
   }
+
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -3,6 +3,7 @@ import 'package:keener_notes/app/modules/notes_list/service/notes_list_service.d
 
 abstract class NotesListRepository {
   Future<NotesListResponse> fetchUserNotes();
+  Future<void> logout();
 }
 
 class NotesListRepositoryImpl implements NotesListRepository {
@@ -13,5 +14,10 @@ class NotesListRepositoryImpl implements NotesListRepository {
   @override
   Future<NotesListResponse> fetchUserNotes() async {
     return _service.fetchUserNotes();
+  }
+
+  @override
+  Future<void> logout() async {
+    _service.signOut();
   }
 }

@@ -28,6 +28,14 @@ class _NotesListPageState extends State<NotesListPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Keener notes'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              store.logout();
+            },
+          )
+        ],
       ),
       body: const ResponsiveLayout(
         mobileBody: NotesListMobileView(),

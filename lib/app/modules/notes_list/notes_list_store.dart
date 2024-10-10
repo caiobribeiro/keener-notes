@@ -33,4 +33,10 @@ abstract class NotesListStoreBase with Store {
 
     return response;
   }
+
+  @action
+  Future<void> logout() async {
+    await _repository.logout();
+    Modular.to.navigate('/');
+  }
 }
