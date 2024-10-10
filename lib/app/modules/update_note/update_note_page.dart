@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:keener_notes/app/shared/mdoels/note_model.dart';
 
 class UpdateNotePage extends StatefulWidget {
-  final String id;
+  final NoteModel note;
   const UpdateNotePage({
     super.key,
-    required this.id,
+    required this.note,
   });
 
   @override
@@ -19,7 +20,7 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(widget.id),
+            Text(widget.note.title),
           ],
         ),
       ),

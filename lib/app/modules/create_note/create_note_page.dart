@@ -22,6 +22,11 @@ class _CreateNotePageState extends State<CreateNotePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Keener Notes'),
+        leading: IconButton(
+            onPressed: () {
+              Modular.to.navigate('/noteslist/');
+            },
+            icon: const Icon(Icons.arrow_back)),
       ),
       body: Center(
         child: Column(

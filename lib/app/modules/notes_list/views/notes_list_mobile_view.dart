@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:keener_notes/app/modules/notes_list/notes_list_store.dart';
 import 'package:keener_notes/app/shared/widgets/custom_button_widget.dart';
@@ -16,22 +17,49 @@ class _NotesListMobileViewState extends State<NotesListMobileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          CustomButtonWidget(
-              onPressed: () {
-                Modular.to.pushNamed('/newnote/');
-              },
-              text: 'New Note'),
-          ListView.builder(
-            itemCount: store.notes.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return ListTile(
-                  title: Text(store.notes[index].title), onTap: () {});
-            },
-          ),
-        ],
+      body: Center(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: CustomButtonWidget(
+                text: 'New Note',
+                onPressed: () {
+                  Modular.to.navigate('/newnote/');
+                },
+              ),
+            ),
+            Observer(builder: (_) {
+              return Column(
+                children: [
+                  store.notes.isEmpty
+                      ? const Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Text(
+                              "You have no notes, let's create your first one?"),
+                        )
+                      : SizedBox(
+                          height: MediaQuery.of(context).size.height * .8,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: store.notes.length,
+                            itemBuilder: (context, index) {
+                              final note = store.notes[index];
+                              return ListTile(
+                                title: Text(note.title),
+                                onTap: () {
+                                  Modular.to.navigate('/updatenote/',
+                                      arguments: note);
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                ],
+              );
+            }),
+          ],
+        ),
       ),
     );
   }

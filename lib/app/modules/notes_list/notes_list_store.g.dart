@@ -41,6 +41,28 @@ mixin _$NotesListStore on NotesListStoreBase, Store {
     });
   }
 
+  late final _$fetchUserNotesAsyncAction =
+      AsyncAction('NotesListStoreBase.fetchUserNotes', context: context);
+
+  @override
+  Future<NotesListResponse> fetchUserNotes() {
+    return _$fetchUserNotesAsyncAction.run(() => super.fetchUserNotes());
+  }
+
+  late final _$NotesListStoreBaseActionController =
+      ActionController(name: 'NotesListStoreBase', context: context);
+
+  @override
+  dynamic selectNote(NoteModel note) {
+    final _$actionInfo = _$NotesListStoreBaseActionController.startAction(
+        name: 'NotesListStoreBase.selectNote');
+    try {
+      return super.selectNote(note);
+    } finally {
+      _$NotesListStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

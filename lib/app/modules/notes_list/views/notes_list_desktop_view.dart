@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:keener_notes/app/modules/notes_list/notes_list_store.dart';
+import 'package:keener_notes/app/shared/mdoels/note_model.dart';
 import 'package:keener_notes/app/shared/widgets/custom_button_widget.dart';
 
 class NotesListDesktopView extends StatefulWidget {
@@ -15,12 +16,6 @@ class _NotesListDesktopViewState extends State<NotesListDesktopView> {
   final NotesListStore store = Modular.get<NotesListStore>();
 
   @override
-  void initState() {
-    store.fetchUserNotes();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Row(
@@ -29,11 +24,15 @@ class _NotesListDesktopViewState extends State<NotesListDesktopView> {
             flex: 1,
             child: Column(
               children: [
-                CustomButtonWidget(
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: CustomButtonWidget(
+                    text: 'New Note',
                     onPressed: () {
-                      Modular.to.pushNamed('/newnote/');
+                      Modular.to.navigate('/newnote/');
                     },
-                    text: 'New Note'),
+                  ),
+                ),
                 Observer(builder: (_) {
                   return Column(
                     children: [
@@ -43,18 +42,21 @@ class _NotesListDesktopViewState extends State<NotesListDesktopView> {
                               child: Text(
                                   "You have no notes, let's create your first one?"),
                             )
-                          : ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: store.notes.length,
-                              itemBuilder: (context, index) {
-                                final note = store.notes[index];
-                                return ListTile(
-                                  title: Text(note.title),
-                                  onTap: () {
-                                    store.selectedNote = note;
-                                  },
-                                );
-                              },
+                          : SizedBox(
+                              height: MediaQuery.of(context).size.height * .8,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: store.notes.length,
+                                itemBuilder: (context, index) {
+                                  final NoteModel note = store.notes[index];
+                                  return ListTile(
+                                    title: Text(note.title),
+                                    onTap: () {
+                                      store.selectNote(note);
+                                    },
+                                  );
+                                },
+                              ),
                             ),
                     ],
                   );
@@ -73,12 +75,28 @@ class _NotesListDesktopViewState extends State<NotesListDesktopView> {
                     : Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(selectedNote.title,
-                                style: const TextStyle(fontSize: 24)),
-                            const SizedBox(height: 10),
-                            Text(selectedNote.body),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(selectedNote.title,
+                                    style: const TextStyle(fontSize: 24)),
+                                const SizedBox(height: 10),
+                                Text(
+                                  selectedNote.body,
+                                ),
+                              ],
+                            ),
+                            Center(
+                              child: CustomButtonWidget(
+                                  onPressed: () {
+                                    Modular.to.navigate('/updatenote/',
+                                        arguments: store.selectedNote);
+                                  },
+                                  text: 'Edit Note'),
+                            ),
                           ],
                         ),
                       );

@@ -17,6 +17,11 @@ abstract class NotesListStoreBase with Store {
   List<NoteModel> notes = [];
 
   @action
+  selectNote(NoteModel note) {
+    selectedNote = note;
+  }
+
+  @action
   Future<NotesListResponse> fetchUserNotes() async {
     final response = await _repository.fetchUserNotes();
 
