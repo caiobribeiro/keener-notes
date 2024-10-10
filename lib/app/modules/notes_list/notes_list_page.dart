@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:keener_notes/app/modules/notes_list/service/notes_list_service.dart';
 import 'package:keener_notes/app/modules/notes_list/views/notes_list_mobile_view.dart';
 import 'package:keener_notes/app/shared/utils/responsive_layout.dart';
 import 'package:keener_notes/app/modules/notes_list/views/notes_list_desktop_view.dart';
