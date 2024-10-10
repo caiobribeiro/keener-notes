@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class UpdateNotePage extends StatefulWidget {
+  final String id;
   const UpdateNotePage({
     super.key,
+    required this.id,
   });
 
   @override
@@ -16,11 +18,11 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
       appBar: AppBar(
         title: const Text('Keener notes'),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('update note'),
+            Text(widget.id),
           ],
         ),
       ),

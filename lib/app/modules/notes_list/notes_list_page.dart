@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:keener_notes/app/modules/notes_list/views/notes_list_mobile_view.dart';
 import 'package:keener_notes/app/shared/utils/responsive_layout.dart';
 import 'package:keener_notes/app/modules/notes_list/views/notes_list_desktop_view.dart';
 
@@ -18,10 +19,10 @@ class _NotesListPageState extends State<NotesListPage> {
       appBar: AppBar(
         title: const Text('Keener notes'),
       ),
-      body: ResponsiveLayout(
-        mobileBody: Container(),
-        tabletBody: Container(),
-        desktopBody: const NotesListDesktopView(),
+      body: const ResponsiveLayout(
+        mobileBody: NotesListMobileView(),
+        tabletBody: NotesListDesktopView(),
+        desktopBody: NotesListDesktopView(),
       ),
     );
   }

@@ -10,6 +10,11 @@ class UpdateNoteModule extends Module {
 
   @override
   void routes(r) {
-    r.child('/', child: (context) => const UpdateNotePage());
+    r.child(
+      '/',
+      child: (context) => UpdateNotePage(
+        id: r.args.queryParams['id']!,
+      ),
+    );
   }
 }
