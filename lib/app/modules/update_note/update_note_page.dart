@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:keener_notes/app/modules/update_note/update_note_store.dart';
 import 'package:keener_notes/app/shared/mdoels/note_model.dart';
+import 'package:keener_notes/app/shared/widgets/custom_button_widget.dart';
+import 'package:keener_notes/app/shared/widgets/custom_tesxt_fild_widget.dart';
 
 class UpdateNotePage extends StatefulWidget {
   final NoteModel note;
@@ -13,14 +17,75 @@ class UpdateNotePage extends StatefulWidget {
 }
 
 class _UpdateNotePageState extends State<UpdateNotePage> {
+  final UpdateNoteStore store = Modular.get<UpdateNoteStore>();
+
+  final TextEditingController _titleEditingController = TextEditingController();
+  final TextEditingController _bodyEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    store.fillNote(widget.note);
+    _titleEditingController.text = widget.note.title;
+    _bodyEditingController.text = widget.note.body;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Keener Notes'),
+        leading: IconButton(
+            onPressed: () {
+              Modular.to.navigate('/noteslist/');
+            },
+            icon: const Icon(Icons.arrow_back)),
+      ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(widget.note.title),
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 70),
+                child: Text(
+                  'New Note',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 32,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: CustomTesxtFildWidget(
+                controller: _titleEditingController,
+                hintText: 'Note Title',
+                onChange: (value) {
+                  store.titleControllerText = value;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: CustomTesxtFildWidget(
+                controller: _bodyEditingController,
+                hintText: 'Note body',
+                maxLines: 10,
+                onChange: (value) {
+                  store.bodyControllerText = value;
+                },
+              ),
+            ),
+            CustomButtonWidget(
+              text: 'Save',
+              onPressed: () async {
+                store.updateNote(noteId: widget.note.id!);
+              },
+            ),
           ],
         ),
       ),
