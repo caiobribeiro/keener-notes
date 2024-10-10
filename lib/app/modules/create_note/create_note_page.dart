@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:keener_notes/app/modules/create_note/create_note_store.dart';
+import 'package:keener_notes/app/shared/widgets/custom_button_widget.dart';
+import 'package:keener_notes/app/shared/widgets/custom_tesxt_fild_widget.dart';
 
 class CreateNotePage extends StatefulWidget {
   const CreateNotePage({
@@ -10,17 +14,55 @@ class CreateNotePage extends StatefulWidget {
 }
 
 class _CreateNotePageState extends State<CreateNotePage> {
+  final CreateNoteStore store = Modular.get<CreateNoteStore>();
+  final TextEditingController _titleEditingController = TextEditingController();
+  final TextEditingController _bodyEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Keener notes'),
+        title: const Text('Keener Notes'),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('create note'),
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 70),
+                child: Text(
+                  'New Note',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 32,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: CustomTesxtFildWidget(
+                controller: _titleEditingController,
+                hintText: 'Note Title',
+                onChange: (value) {
+                  store.titleControllerText = value;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: CustomTesxtFildWidget(
+                controller: _bodyEditingController,
+                hintText: 'Note body',
+                maxLines: 10,
+                onChange: (value) {
+                  store.bodyControllerText = value;
+                },
+              ),
+            ),
+            CustomButtonWidget(onPressed: store.createNewNote, text: 'Save'),
           ],
         ),
       ),
