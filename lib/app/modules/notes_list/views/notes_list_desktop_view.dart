@@ -13,6 +13,13 @@ class NotesListDesktopView extends StatefulWidget {
 
 class _NotesListDesktopViewState extends State<NotesListDesktopView> {
   final NotesListStore store = Modular.get<NotesListStore>();
+
+  @override
+  void initState() {
+    store.fetchUserNotes();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,21 +34,31 @@ class _NotesListDesktopViewState extends State<NotesListDesktopView> {
                       Modular.to.pushNamed('/newnote/');
                     },
                     text: 'New Note'),
-                Observer(
-                  builder: (_) => ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: store.notes.length,
-                    itemBuilder: (context, index) {
-                      final note = store.notes[index];
-                      return ListTile(
-                        title: Text(note.title),
-                        onTap: () {
-                          store.selectedNote = note;
-                        },
-                      );
-                    },
-                  ),
-                ),
+                Observer(builder: (_) {
+                  return Column(
+                    children: [
+                      store.notes.isEmpty
+                          ? const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Text(
+                                  "You have no notes, let's create your first one?"),
+                            )
+                          : ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: store.notes.length,
+                              itemBuilder: (context, index) {
+                                final note = store.notes[index];
+                                return ListTile(
+                                  title: Text(note.title),
+                                  onTap: () {
+                                    store.selectedNote = note;
+                                  },
+                                );
+                              },
+                            ),
+                    ],
+                  );
+                }),
               ],
             ),
           ),
@@ -52,7 +69,7 @@ class _NotesListDesktopViewState extends State<NotesListDesktopView> {
               builder: (_) {
                 final selectedNote = store.selectedNote;
                 return selectedNote == null
-                    ? const Center(child: Text('Nenhuma nota selecionada'))
+                    ? const Center(child: Text('No note selected'))
                     : Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
