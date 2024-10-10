@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:keener_notes/app/modules/update_note/response/update_note_response.dart';
 
 class UpdateNoteService {
-  Future<void> updateNote({
+  Future<UpdateNoteResponse> updateNote({
     required String noteId,
     required String title,
     required String body,
@@ -10,11 +11,8 @@ class UpdateNoteService {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
     final User? user = auth.currentUser;
-    if (user == null) {
-      throw Exception('User not logged in');
-    }
 
-    final String userUid = user.uid;
+    final String userUid = user!.uid;
     final DocumentReference noteDoc = firestore
         .collection('users')
         .doc(userUid)
@@ -26,8 +24,9 @@ class UpdateNoteService {
         'title': title,
         'body': body,
       });
+      return UpdateNoteResponse(success: true);
     } catch (e) {
-      throw Exception('Failed to update note: $e');
+      return UpdateNoteResponse(success: false, error: e.toString());
     }
   }
 }
