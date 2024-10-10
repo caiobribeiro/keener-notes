@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:keener_notes/modules/create_note/create_note_page.dart';
-import 'package:keener_notes/modules/create_note/create_note_store.dart';
+import 'package:keener_notes/app/modules/create_note/create_note_page.dart';
+import 'package:keener_notes/app/modules/create_note/create_note_store.dart';
 
 class CreateNoteModule extends Module {
   @override
