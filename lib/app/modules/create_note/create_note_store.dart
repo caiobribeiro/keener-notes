@@ -21,7 +21,7 @@ abstract class CreateNoteStoreBase with Store {
     final response = await _repository.createNote(
         title: titleControllerText, body: bodyControllerText);
     if (response.error == null) {
-      Modular.to.navigate('/');
+      Modular.to.navigate('/noteslist/');
     }
     return response;
   }

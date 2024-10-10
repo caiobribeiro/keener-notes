@@ -13,7 +13,7 @@ class UpdateNoteModule extends Module {
     r.child(
       '/',
       child: (context) => UpdateNotePage(
-        id: r.args.queryParams['id']!,
+        note: r.args.data,
       ),
     );
   }
