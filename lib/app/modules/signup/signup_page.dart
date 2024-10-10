@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:keener_notes/app/modules/signup/service/signup_service.dart';
+import 'package:keener_notes/app/modules/signup/repository/signup_repository.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({
@@ -12,7 +12,7 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-  final SignupService service = Modular.get<SignupService>();
+  final SignupRepository service = Modular.get<SignupRepository>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
