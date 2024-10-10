@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:keener_notes/app/modules/signin/repository/signin_repository.dart';
 import 'package:mobx/mobx.dart';
@@ -27,11 +28,27 @@ abstract class SigninStoreBase with Store {
   bool get isFormValid => isEmailValid && passwordControllerText.isNotEmpty;
 
   @action
+  Future<void> isUserLogged() async {
+    var currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser != null) {
+      Modular.to.navigate('/noteslist/');
+    }
+  }
+
+  @action
   Future<void> signin() async {
     final response = await _repository.signin(
         email: emailControllerText, password: passwordControllerText);
     if (!response.success) {
       responseWarning = response.firebaseAuthException ?? 'Unknown error';
+    } else {
+      Modular.to.navigate('/noteslist/');
     }
+  }
+
+  @action
+  navigateToRegister() {
+    Modular.to.navigate('/signup/');
   }
 }

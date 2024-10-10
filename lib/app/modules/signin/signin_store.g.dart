@@ -73,12 +73,34 @@ mixin _$SigninStore on SigninStoreBase, Store {
     });
   }
 
+  late final _$isUserLoggedAsyncAction =
+      AsyncAction('SigninStoreBase.isUserLogged', context: context);
+
+  @override
+  Future<void> isUserLogged() {
+    return _$isUserLoggedAsyncAction.run(() => super.isUserLogged());
+  }
+
   late final _$signinAsyncAction =
       AsyncAction('SigninStoreBase.signin', context: context);
 
   @override
   Future<void> signin() {
     return _$signinAsyncAction.run(() => super.signin());
+  }
+
+  late final _$SigninStoreBaseActionController =
+      ActionController(name: 'SigninStoreBase', context: context);
+
+  @override
+  dynamic navigateToRegister() {
+    final _$actionInfo = _$SigninStoreBaseActionController.startAction(
+        name: 'SigninStoreBase.navigateToRegister');
+    try {
+      return super.navigateToRegister();
+    } finally {
+      _$SigninStoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

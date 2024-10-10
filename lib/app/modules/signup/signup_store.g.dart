@@ -127,6 +127,20 @@ mixin _$SignupStore on SignupStoreBase, Store {
     return _$registerAccountAsyncAction.run(() => super.registerAccount());
   }
 
+  late final _$SignupStoreBaseActionController =
+      ActionController(name: 'SignupStoreBase', context: context);
+
+  @override
+  dynamic navigateToSignin() {
+    final _$actionInfo = _$SignupStoreBaseActionController.startAction(
+        name: 'SignupStoreBase.navigateToSignin');
+    try {
+      return super.navigateToSignin();
+    } finally {
+      _$SignupStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

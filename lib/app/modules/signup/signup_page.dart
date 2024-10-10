@@ -106,6 +106,15 @@ class _SignupPageState extends State<SignupPage> {
                       );
                     }),
                   ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: CustomButtonWidget(
+                        text: 'Go to sigin',
+                        onPressed: store.navigateToSignin,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -55,7 +55,14 @@ abstract class SignupStoreBase with Store {
     if (!response.success) {
       responseWarning = response.firebaseAuthException ?? 'Unknown error';
     }
-
+    if (response.success) {
+      Modular.to.navigate('/noteslist/');
+    }
     return response;
+  }
+
+  @action
+  navigateToSignin() {
+    Modular.to.navigate('/');
   }
 }

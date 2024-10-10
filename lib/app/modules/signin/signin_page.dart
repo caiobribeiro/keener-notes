@@ -24,6 +24,12 @@ class _SigninPageState extends State<SigninPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   @override
+  void initState() {
+    store.isUserLogged();
+    super.initState();
+  }
+
+  @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
@@ -96,6 +102,15 @@ class _SigninPageState extends State<SigninPage> {
                         ],
                       );
                     }),
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: CustomButtonWidget(
+                        text: 'Go to register',
+                        onPressed: store.navigateToRegister,
+                      ),
+                    ),
                   ),
                 ],
               ),
