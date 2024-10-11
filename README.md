@@ -6,6 +6,8 @@ Keener Notes is simple note taking app.
 
 Developed in [Flutter].
 
+## Developers 
+
 ⚠️ Important, read the [ARCHITECTURE](./ARCHITECTURE.md)  before starting development, your code MUST comply with the ARCHITECTURE rules.
 
 ## Features
