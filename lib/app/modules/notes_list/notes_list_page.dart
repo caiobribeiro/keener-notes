@@ -31,9 +31,7 @@ class _NotesListPageState extends State<NotesListPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: () {
-              store.logout();
-            },
+            onPressed: store.logout,
           )
         ],
       ),
