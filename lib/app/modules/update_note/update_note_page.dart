@@ -30,6 +30,13 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
   }
 
   @override
+  void dispose() {
+    _titleEditingController.dispose();
+    _bodyEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

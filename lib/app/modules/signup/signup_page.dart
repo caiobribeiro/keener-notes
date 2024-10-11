@@ -94,7 +94,11 @@ class _SignupPageState extends State<SignupPage> {
                           CustomButtonWidget(
                             isValid: store.isFormCorrect,
                             text: 'Register account',
-                            onPressed: store.registerAccount,
+                            onPressed: () {
+                              if (store.isFormCorrect) {
+                                store.registerAccount();
+                              }
+                            },
                           ),
                         ],
                       );

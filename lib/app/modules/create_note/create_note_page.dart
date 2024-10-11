@@ -14,8 +14,17 @@ class CreateNotePage extends StatefulWidget {
 
 class _CreateNotePageState extends State<CreateNotePage> {
   final CreateNoteStore store = Modular.get<CreateNoteStore>();
+
   final TextEditingController _titleEditingController = TextEditingController();
   final TextEditingController _bodyEditingController = TextEditingController();
+
+  @override
+  void dispose() {
+    _titleEditingController.dispose();
+    _bodyEditingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
