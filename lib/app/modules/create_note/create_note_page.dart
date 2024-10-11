@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:keener_notes/app/modules/create_note/create_note_store.dart';
-import 'package:keener_notes/app/shared/widgets/custom_button_widget.dart';
 import 'package:keener_notes/app/shared/widgets/custom_tesxt_fild_widget.dart';
 
 class CreateNotePage extends StatefulWidget {
@@ -23,26 +22,32 @@ class _CreateNotePageState extends State<CreateNotePage> {
       appBar: AppBar(
         title: const Text('Keener Notes'),
         leading: IconButton(
-            onPressed: () {
-              Modular.to.navigate('/noteslist/');
-            },
-            icon: const Icon(Icons.arrow_back)),
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Modular.to.navigate('/noteslist/');
+          },
+        ),
+        actions: [
+          TextButton.icon(
+            label: const Text('Save'),
+            icon: const Icon(Icons.save),
+            onPressed: store.createNewNote,
+          )
+        ],
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Center(
-              child: Padding(
-                padding: EdgeInsets.only(bottom: 70),
-                child: Text(
-                  'New Note',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 32,
-                  ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 70),
+              child: Text(
+                'New Note',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 32,
                 ),
               ),
             ),
@@ -67,7 +72,6 @@ class _CreateNotePageState extends State<CreateNotePage> {
                 },
               ),
             ),
-            CustomButtonWidget(onPressed: store.createNewNote, text: 'Save'),
           ],
         ),
       ),
