@@ -69,17 +69,13 @@ class _SigninPageState extends State<SigninPage> {
                   CustomTesxtFildWidget(
                     controller: _emailController,
                     hintText: 'Email',
-                    onChange: (value) {
-                      store.emailControllerText = value;
-                    },
+                    onChange: store.setEmail,
                   ),
                   _titleText(context, 'Password'),
                   CustomPassworfFieldWidget(
                     controller: _passwordController,
                     hintText: 'Password',
-                    onChange: (value) {
-                      store.passwordControllerText = value;
-                    },
+                    onChange: store.setPassword,
                   ),
                   const SizedBox(
                     height: 10,

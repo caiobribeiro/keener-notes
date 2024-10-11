@@ -49,6 +49,14 @@ mixin _$NotesListStore on NotesListStoreBase, Store {
     return _$fetchUserNotesAsyncAction.run(() => super.fetchUserNotes());
   }
 
+  late final _$logoutAsyncAction =
+      AsyncAction('NotesListStoreBase.logout', context: context);
+
+  @override
+  Future<void> logout() {
+    return _$logoutAsyncAction.run(() => super.logout());
+  }
+
   late final _$NotesListStoreBaseActionController =
       ActionController(name: 'NotesListStoreBase', context: context);
 

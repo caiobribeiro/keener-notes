@@ -44,19 +44,7 @@ class _NotesListDesktopViewState extends State<NotesListDesktopView> {
                             )
                           : SizedBox(
                               height: MediaQuery.of(context).size.height * .8,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: store.notes.length,
-                                itemBuilder: (context, index) {
-                                  final NoteModel note = store.notes[index];
-                                  return ListTile(
-                                    title: Text(note.title),
-                                    onTap: () {
-                                      store.selectNote(note);
-                                    },
-                                  );
-                                },
-                              ),
+                              child: _listNotes(context, store.notes),
                             ),
                     ],
                   );
@@ -105,6 +93,27 @@ class _NotesListDesktopViewState extends State<NotesListDesktopView> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _listNotes(BuildContext context, List<NoteModel> notes) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: store.notes.length,
+      itemBuilder: (context, index) {
+        final NoteModel note = store.notes[index];
+        return Column(
+          children: [
+            const Divider(),
+            ListTile(
+              title: Text(note.title),
+              onTap: () {
+                store.selectNote(note);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

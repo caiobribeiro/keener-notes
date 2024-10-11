@@ -56,9 +56,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
               child: CustomTesxtFildWidget(
                 controller: _titleEditingController,
                 hintText: 'Note Title',
-                onChange: (value) {
-                  store.titleControllerText = value;
-                },
+                onChange: store.setTitle,
               ),
             ),
             Padding(
@@ -67,9 +65,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                 controller: _bodyEditingController,
                 hintText: 'Note body',
                 maxLines: 10,
-                onChange: (value) {
-                  store.bodyControllerText = value;
-                },
+                onChange: store.setBody,
               ),
             ),
           ],

@@ -12,23 +12,29 @@ abstract class UpdateNoteStoreBase with Store {
   final UpdateNoteRepository _repository = Modular.get<UpdateNoteRepository>();
 
   @observable
-  String titleControllerText = '';
+  String title = '';
+
+  @action
+  void setTitle(String value) => title = value;
 
   @observable
-  String bodyControllerText = '';
+  String body = '';
+
+  @action
+  void setBody(String value) => body = value;
 
   @action
   fillNote(NoteModel note) {
-    titleControllerText = note.title;
-    bodyControllerText = note.body;
+    setTitle(note.title);
+    setBody(note.body);
   }
 
   @action
   Future<UpdateNoteResponse> updateNote({required String noteId}) async {
     final response = await _repository.updateNote(
       noteId: noteId,
-      title: titleControllerText,
-      body: bodyControllerText,
+      title: title,
+      body: body,
     );
     if (response.success) {
       Modular.to.navigate('/noteslist/');

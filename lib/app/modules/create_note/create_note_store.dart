@@ -11,15 +11,20 @@ abstract class CreateNoteStoreBase with Store {
   final CreateNoteRepository _repository = Modular.get<CreateNoteRepository>();
 
   @observable
-  String titleControllerText = '';
+  String title = '';
+
+  @action
+  void setTitle(String value) => title = value;
 
   @observable
-  String bodyControllerText = '';
+  String body = '';
+
+  @action
+  void setBody(String value) => body = value;
 
   @action
   Future<CreateNoteResponse> createNewNote() async {
-    final response = await _repository.createNote(
-        title: titleControllerText, body: bodyControllerText);
+    final response = await _repository.createNote(title: title, body: body);
     if (response.error == null) {
       Modular.to.navigate('/noteslist/');
     }

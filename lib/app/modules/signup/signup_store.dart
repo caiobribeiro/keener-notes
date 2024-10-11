@@ -11,35 +11,45 @@ abstract class SignupStoreBase with Store {
   final SignupRepository _signupRepository = Modular.get<SignupRepository>();
 
   @observable
-  String emailControllerText = '';
+  String email = '';
+
+  @action
+  void setEmail(String value) => email = value;
 
   @observable
-  String passwordControllerText = '';
+  String password = '';
+
+  @action
+  void setPassword(String value) => password = value;
 
   @observable
-  String passwordConfirmationControllerText = '';
+  String passwordConfirmation = '';
+
+  @action
+  void setPasswordConfirmation(String value) => passwordConfirmation = value;
 
   @observable
   String responseWarning = '';
 
+  @action
+  void setResponseWarning(String value) => responseWarning = value;
+
   @computed
   bool get isEmailValid => RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-      .hasMatch(emailControllerText);
+      .hasMatch(email);
 
   @computed
   bool get isPasswordSafe =>
       RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~.]).{8,}$')
-          .hasMatch(passwordControllerText);
+          .hasMatch(password);
 
   @computed
   bool get isPasswordEmpty =>
-      passwordControllerText.isNotEmpty &&
-      passwordConfirmationControllerText.isNotEmpty;
+      password.isNotEmpty && passwordConfirmation.isNotEmpty;
 
   @computed
-  bool get isPasswordEqual =>
-      passwordControllerText == passwordConfirmationControllerText;
+  bool get isPasswordEqual => password == passwordConfirmation;
 
   @computed
   bool get isBothPasswordValid =>
@@ -50,8 +60,8 @@ abstract class SignupStoreBase with Store {
 
   @action
   Future<SignupResponse> registerAccount() async {
-    final response = await _signupRepository.signup(
-        email: emailControllerText, password: passwordControllerText);
+    final response =
+        await _signupRepository.signup(email: email, password: password);
     if (!response.success) {
       responseWarning = response.firebaseAuthException ?? 'Unknown error';
     }

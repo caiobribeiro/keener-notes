@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:keener_notes/app/modules/update_note/update_note_store.dart';
 import 'package:keener_notes/app/shared/mdoels/note_model.dart';
-import 'package:keener_notes/app/shared/widgets/custom_button_widget.dart';
 import 'package:keener_notes/app/shared/widgets/custom_tesxt_fild_widget.dart';
 
 class UpdateNotePage extends StatefulWidget {
@@ -74,9 +73,7 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
               child: CustomTesxtFildWidget(
                 controller: _titleEditingController,
                 hintText: 'Note Title',
-                onChange: (value) {
-                  store.titleControllerText = value;
-                },
+                onChange: store.setTitle,
               ),
             ),
             Padding(
@@ -85,9 +82,7 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
                 controller: _bodyEditingController,
                 hintText: 'Note body',
                 maxLines: 10,
-                onChange: (value) {
-                  store.bodyControllerText = value;
-                },
+                onChange: store.setBody,
               ),
             ),
           ],

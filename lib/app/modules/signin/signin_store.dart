@@ -11,21 +11,30 @@ abstract class SigninStoreBase with Store {
   final SigninRepository _repository = Modular.get<SigninRepository>();
 
   @observable
-  String emailControllerText = '';
+  String email = '';
+
+  @action
+  void setEmail(String value) => email = value;
 
   @observable
-  String passwordControllerText = '';
+  String password = '';
+
+  @action
+  void setPassword(String value) => password = value;
 
   @observable
   String responseWarning = '';
 
+  @action
+  void setResponseWarning(String value) => responseWarning = value;
+
   @computed
   bool get isEmailValid => RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-      .hasMatch(emailControllerText);
+      .hasMatch(email);
 
   @computed
-  bool get isFormValid => isEmailValid && passwordControllerText.isNotEmpty;
+  bool get isFormValid => isEmailValid && password.isNotEmpty;
 
   @action
   Future<void> isUserLogged() async {
@@ -38,10 +47,9 @@ abstract class SigninStoreBase with Store {
 
   @action
   Future<void> signin() async {
-    final response = await _repository.signin(
-        email: emailControllerText, password: passwordControllerText);
+    final response = await _repository.signin(email: email, password: password);
     if (!response.success) {
-      responseWarning = response.firebaseAuthException ?? 'Unknown error';
+      setResponseWarning(response.firebaseAuthException ?? 'Unknown error');
     } else {
       Modular.to.navigate('/noteslist/');
     }

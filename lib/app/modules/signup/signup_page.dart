@@ -64,25 +64,19 @@ class _SignupPageState extends State<SignupPage> {
                   CustomTesxtFildWidget(
                     controller: _emailController,
                     hintText: 'Email',
-                    onChange: (value) {
-                      store.emailControllerText = value;
-                    },
+                    onChange: store.setEmail,
                   ),
                   _titleText(context, 'Password'),
                   CustomPassworfFieldWidget(
                     controller: _passwordController,
                     hintText: 'Password',
-                    onChange: (value) {
-                      store.passwordControllerText = value;
-                    },
+                    onChange: store.setPassword,
                   ),
                   _titleText(context, 'Password confirmation'),
                   CustomPassworfFieldWidget(
                     controller: _passwordConfirmationController,
                     hintText: 'Password',
-                    onChange: (value) {
-                      store.passwordConfirmationControllerText = value;
-                    },
+                    onChange: store.setPasswordConfirmation,
                   ),
                   const SizedBox(
                     height: 10,

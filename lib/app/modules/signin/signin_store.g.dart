@@ -24,36 +24,35 @@ mixin _$SigninStore on SigninStoreBase, Store {
               name: 'SigninStoreBase.isFormValid'))
           .value;
 
-  late final _$emailControllerTextAtom =
-      Atom(name: 'SigninStoreBase.emailControllerText', context: context);
+  late final _$emailAtom =
+      Atom(name: 'SigninStoreBase.email', context: context);
 
   @override
-  String get emailControllerText {
-    _$emailControllerTextAtom.reportRead();
-    return super.emailControllerText;
+  String get email {
+    _$emailAtom.reportRead();
+    return super.email;
   }
 
   @override
-  set emailControllerText(String value) {
-    _$emailControllerTextAtom.reportWrite(value, super.emailControllerText, () {
-      super.emailControllerText = value;
+  set email(String value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
     });
   }
 
-  late final _$passwordControllerTextAtom =
-      Atom(name: 'SigninStoreBase.passwordControllerText', context: context);
+  late final _$passwordAtom =
+      Atom(name: 'SigninStoreBase.password', context: context);
 
   @override
-  String get passwordControllerText {
-    _$passwordControllerTextAtom.reportRead();
-    return super.passwordControllerText;
+  String get password {
+    _$passwordAtom.reportRead();
+    return super.password;
   }
 
   @override
-  set passwordControllerText(String value) {
-    _$passwordControllerTextAtom
-        .reportWrite(value, super.passwordControllerText, () {
-      super.passwordControllerText = value;
+  set password(String value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
     });
   }
 
@@ -93,6 +92,39 @@ mixin _$SigninStore on SigninStoreBase, Store {
       ActionController(name: 'SigninStoreBase', context: context);
 
   @override
+  void setEmail(String value) {
+    final _$actionInfo = _$SigninStoreBaseActionController.startAction(
+        name: 'SigninStoreBase.setEmail');
+    try {
+      return super.setEmail(value);
+    } finally {
+      _$SigninStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setPassword(String value) {
+    final _$actionInfo = _$SigninStoreBaseActionController.startAction(
+        name: 'SigninStoreBase.setPassword');
+    try {
+      return super.setPassword(value);
+    } finally {
+      _$SigninStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setResponseWarning(String value) {
+    final _$actionInfo = _$SigninStoreBaseActionController.startAction(
+        name: 'SigninStoreBase.setResponseWarning');
+    try {
+      return super.setResponseWarning(value);
+    } finally {
+      _$SigninStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic navigateToRegister() {
     final _$actionInfo = _$SigninStoreBaseActionController.startAction(
         name: 'SigninStoreBase.navigateToRegister');
@@ -106,8 +138,8 @@ mixin _$SigninStore on SigninStoreBase, Store {
   @override
   String toString() {
     return '''
-emailControllerText: ${emailControllerText},
-passwordControllerText: ${passwordControllerText},
+email: ${email},
+password: ${password},
 responseWarning: ${responseWarning},
 isEmailValid: ${isEmailValid},
 isFormValid: ${isFormValid}
