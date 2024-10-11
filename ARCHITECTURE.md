@@ -27,10 +27,16 @@ Packages from The official package repository for Dart and Flutter apps.
 
 - [Modular] - Modularized routes and Modularized Dependency Injection;
 - [MobX] - State manager;
+- [Firebase_Core] - A Flutter plugin to use the Firebase Core API;
+- [Firebase_Auth] - A Flutter plugin to use the Firebase Authentication API;
+- [Cloud_Firestore] - A Flutter plugin to use the Cloud Firestore API;
+- [Firebase_Crashlytics] - A Flutter plugin to use the Firebase Crashlytics API.
 
 
     [MobX]: <https://pub.dev/packages/mobx/>
     [Modular]: <https://pub.dev/packages/flutter_modular>
-    [Appwrite]: <https://pub.dev/packages/appwrite>
-    [SharedPreferences]: <https://pub.dev/packages/shared_preferences>
-    [ExpansionTileCard]: <https://pub.dev/packages/expansion_tile_card>
+    [Firebase_Core]: <https://pub.dev/packages/firebase_core>
+    [Firebase_Auth]: <https://pub.dev/packages/firebase_auth>
+    [Cloud_Firestore]: <https://pub.dev/packages/cloud_firestore>
+    [Firebase_Crashlytics]: <https://pub.dev/packages/firebase_crashlytics>
+  
