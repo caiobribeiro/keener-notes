@@ -25,6 +25,7 @@ Developed in [Flutter].
 
 ## Installation and Running
 
+⚠️ Disclaimer: The file firebase_options.dart is not included in this repository; therefore, features that require Firebase connectivity won't work out of the box. 
 
 Install the dependencies and dev dependencies and run the project.
 
