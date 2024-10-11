@@ -36,10 +36,20 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
       appBar: AppBar(
         title: const Text('Keener Notes'),
         leading: IconButton(
+          onPressed: () {
+            Modular.to.navigate('/noteslist/');
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        actions: [
+          TextButton.icon(
+            label: const Text('Save'),
+            icon: const Icon(Icons.save),
             onPressed: () {
-              Modular.to.navigate('/noteslist/');
+              store.updateNote(noteId: widget.note.id!);
             },
-            icon: const Icon(Icons.arrow_back)),
+          )
+        ],
       ),
       body: Center(
         child: Column(
@@ -50,7 +60,7 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
               child: Padding(
                 padding: EdgeInsets.only(bottom: 70),
                 child: Text(
-                  'New Note',
+                  'Update Note',
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -79,12 +89,6 @@ class _UpdateNotePageState extends State<UpdateNotePage> {
                   store.bodyControllerText = value;
                 },
               ),
-            ),
-            CustomButtonWidget(
-              text: 'Save',
-              onPressed: () async {
-                store.updateNote(noteId: widget.note.id!);
-              },
             ),
           ],
         ),

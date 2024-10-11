@@ -29,7 +29,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
         ),
         actions: [
           TextButton.icon(
-            label: const Text('Save'),
+            label: const Text('Create Note'),
             icon: const Icon(Icons.save),
             onPressed: store.createNewNote,
           )
